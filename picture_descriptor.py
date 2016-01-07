@@ -1,11 +1,15 @@
+#!/usr/bin/env python3
+
 """Picture Descriptor. This program scrapes a random picture description from
 the University of Southern California's Digital Library (the California
 Historical Society Collection, 1860-1960). Optionally, the user can view the
 associated image.
 
 Version 1.0, January 6, 2016
+Tested with Python 3.5.0
 
-TODO: Handle exceptions, especially in get_random_desc and get_image.
+TODO: Anticipate and handle exceptions, especially in get_random_desc and
+get_image.
 """
 
 import tkinter as tk
