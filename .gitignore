@@ -2,6 +2,7 @@
 *.jpg
 *.jpeg
 
-# PyInstaller build directory and spec file
+# PyInstaller build/dist directories and spec file
 build/
+dist/
 *.spec
