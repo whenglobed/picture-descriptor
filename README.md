@@ -2,6 +2,12 @@
 
 University of Southern California (USC)'s Digital Library has some fantastic photo collections, including the enormous California Historical Society Collection, 1860-1960. Most, if not all, of the photographs in this collection have lengthy and precise descriptions of the scene or object in the photograph. This program generates a random item ID, finds the item on the USC website, then scrapes the description from that item's page. Optionally, the user can choose to view the associated image.
 
+#### Required modules:
+* Beautiful Soup 4
+* Pillow
+* Tkinter, if your Python installation doesn't have it by default  
+NOTE: This program has only been tested with Python 3.5.0
+
 #### Inspiration:
 Based on an idea from the intfiction.org forums, seen here:  
 http://www.intfiction.org/forum/viewtopic.php?f=6&t=18987&start=40
