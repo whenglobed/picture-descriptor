@@ -5,7 +5,7 @@ the University of Southern California's Digital Library (the California
 Historical Society Collection, 1860-1960). Optionally, the user can view the
 associated image.
 
-Version 1.0, January 6, 2016
+Version 1.1, June 21, 2016
 Tested with Python 3.5.0
 
 TODO: Anticipate and handle exceptions, especially in get_random_desc and
@@ -53,6 +53,8 @@ class PictureDescriptor(tk.Frame):
         self._root().title("Picture Descriptor")
         self.config(padx=0, pady=5)
         self.grid()
+        self.id = None
+        self.last_image_id = None
         self.target_url = ""
         self.photo_url = ""
         self.setup_widgets()
@@ -127,6 +129,7 @@ class PictureDescriptor(tk.Frame):
         """
 
         self.id = get_random_id()
+        # self.id = 1139 # TEST -- causes known problem with image viewer
 
         # Build the URLs used to scrape the description and access the image
         # viewer.
@@ -167,26 +170,43 @@ class PictureDescriptor(tk.Frame):
             return None
         filename, headers = request.urlretrieve(self.photo_url,
                                                 filename="digitallibrary.usc.edu.jpg")
-        image = Image.open(filename)
-        return ImageTk.PhotoImage(image)
+        try:
+            # Attempt to convert the downloaded image to a PhotoImage, a
+            # Tkinter-usable object type.
+            image = ImageTk.PhotoImage(Image.open(filename))
+        except OSError as err:
+            image = None
+        return image
 
     def show_image(self):
-        """Show the image for the current item ID in a new window."""
+        """Show the image for the current item ID in a new window.
 
-        # TODO: Only update the image if the item ID has changed.
-        self.canvas.photoimage = self.get_image()
-        if (self.canvas.photoimage is not None):
+        Only retrieves and updates the image if the ID has changed
+        since the last time the image was shown.
+        """
+
+        if (self.id != self.last_image_id):
+            self.last_image_id = self.id
+            self.canvas.photoimage = self.get_image()
+
             self.image_window.title("Item ID: " + str(self.id))
             self.canvas.delete(tk.ALL)
-            self.canvas.config(width=self.canvas.photoimage.width(),
-                               height=self.canvas.photoimage.height())
-            self.canvas.create_image(0, 0,
-                                     anchor=tk.NW,
-                                     image=self.canvas.photoimage)
+
+            if (self.canvas.photoimage is not None):
+                self.canvas.config(width=self.canvas.photoimage.width(),
+                                   height=self.canvas.photoimage.height())
+                self.canvas.create_image(0, 0,
+                                         anchor=tk.NW,
+                                         image=self.canvas.photoimage)
+            else:
+                self.canvas.create_text(2, 0,
+                                        anchor=tk.NW,
+                                        text="Error: could not load ID " +
+                                        str(self.id) + " in the USC image viewer.")
             self.canvas.grid()
 
-            # Show the window.
-            self.image_window.deiconify()
+        # Show the window.
+        self.image_window.deiconify()
 
 
 if __name__ == "__main__":
