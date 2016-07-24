@@ -8,12 +8,11 @@ associated image.
 Version 1.1, June 21, 2016
 Tested with Python 3.5.0
 
-TODO: Anticipate and handle exceptions, especially in get_random_desc and
-get_image.
 """
 
 import tkinter as tk
 import random
+import webbrowser
 from urllib import request
 from PIL import Image, ImageTk
 
@@ -38,6 +37,12 @@ def get_random_id():
     random.seed()
     return random.randint(ID_RANGE[0], ID_RANGE[1])
 
+def open_url(event):
+        """Open the current library URL in a new browser window."""
+
+        url = event.widget.get()
+        if url is not None and url != "":
+            webbrowser.open(event.widget.get(), new=2, autoraise=False)
 
 class PictureDescriptor(tk.Frame):
     """Base class for the GUI.
@@ -62,7 +67,6 @@ class PictureDescriptor(tk.Frame):
     def setup_widgets(self):
         """Initialize and arrange components within the frame."""
 
-        # TODO: Make the URL field a clickable link.
         # TODO: return a tuple to __init__, to keep the components 'inside' init?
         self.get_button = tk.Button(self,
                                     text="Get a Random Description",
@@ -83,7 +87,11 @@ class PictureDescriptor(tk.Frame):
         self.url_field = tk.Entry(self,
                                   width=70,
                                   textvariable=self.current_url,
+                                  fg="blue",
+                                  cursor="hand2",
                                   state="readonly")
+        self.url_field.config(font=(self.url_field.cget("font"), 10, "underline"))
+        self.url_field.bind("<Button-1>", open_url)
         self.url_field.grid(row=2, column=1, sticky=tk.W)
 
         self.desc_frame = tk.LabelFrame(self,
@@ -129,7 +137,6 @@ class PictureDescriptor(tk.Frame):
         """
 
         self.id = get_random_id()
-        # self.id = 1139 # TEST -- causes known problem with image viewer
 
         # Build the URLs used to scrape the description and access the image
         # viewer.
@@ -207,6 +214,7 @@ class PictureDescriptor(tk.Frame):
 
         # Show the window.
         self.image_window.deiconify()
+
 
 
 if __name__ == "__main__":
