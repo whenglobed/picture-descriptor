@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
 
 
-### Constants
+# Constants
 
 ID_RANGE = (0, 26223)
 ITEM_URL_BASE = "http://digitallibrary.usc.edu/" \
@@ -37,12 +37,14 @@ def get_random_id():
     random.seed()
     return random.randint(ID_RANGE[0], ID_RANGE[1])
 
+
 def open_url(event):
         """Open the current library URL in a new browser window."""
 
         url = event.widget.get()
         if url is not None and url != "":
             webbrowser.open(event.widget.get(), new=2, autoraise=False)
+
 
 class PictureDescriptor(tk.Frame):
     """Base class for the GUI.
@@ -214,7 +216,6 @@ class PictureDescriptor(tk.Frame):
 
         # Show the window.
         self.image_window.deiconify()
-
 
 
 if __name__ == "__main__":
