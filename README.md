@@ -11,6 +11,10 @@ For other operating systems, you have to download and run "picture\_descriptor.p
 * Pillow
 * Tkinter, if your Python installation doesn't have it by default  
 
+#### Screenshots:
+![control panel](/screenshots/picture_descriptor_screenshot1.png&raw=true)
+![image viewer](/screenshots/picture_descriptor_screenshot2.jpg&raw=true)
+
 #### Inspiration:
 Picture Descriptor is based on an idea from the intfiction.org forums, seen here:  
 http://www.intfiction.org/forum/viewtopic.php?f=6&t=18987&start=40

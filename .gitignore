@@ -1,6 +1,6 @@
-# Images
-*.jpg
-*.jpeg
+# Temp Images
+digitallibrary.usc.edu.jpg
+digitallibrary.usc.edu.jpeg
 
 # PyInstaller build/dist directories and spec files
 build/
