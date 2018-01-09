@@ -1,6 +1,6 @@
 ## Picture Descriptor
 
-University of Southern California (USC)'s Digital Library has some fantastic photo collections, including the enormous California Historical Society Collection, 1860-1960. Most, if not all, of the photographs in this collection have lengthy and precise descriptions of the scene or object in the photograph. This program generates a random item ID, finds the item on the USC website, then scrapes the description from that item's page. Optionally, the user can choose to view the associated image.
+University of Southern California (USC)'s Digital Library has some fantastic photo collections, including the enormous California Historical Society Collection, 1860-1960. Most of the photographs in this collection have lengthy and precise descriptions of the scene or object in the photograph. This program generates a random item ID, finds the item on the USC website, then scrapes the description from that item's page. Optionally, the user can choose to view the associated image.
 
 #### Usage
 Windows users can simply run "picture\_descriptor\_win32.exe", found in the Releases section.  
